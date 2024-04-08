@@ -12,11 +12,23 @@ import java.util.List;
 public class EmployeesService {
 
 	@Autowired
-	private EmployeesRepository employeesRepository;
+	EmployeesRepository employeesRepository;
 
 
 	public List<Employees> getAllEmployees() {
 		return employeesRepository.findAll();
+	}
+
+	public Employees getEmployeeById(long id) {
+		return employeesRepository.getEmployeeById(id);
+	}
+
+	public void deleteEmployeeById(long id) {
+		employeesRepository.deleteEmployeeById(id);
+	}
+
+	public void saveEmployee(Employees employee) {
+		employeesRepository.save(employee);
 	}
 
 

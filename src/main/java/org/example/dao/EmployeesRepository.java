@@ -9,6 +9,6 @@ import java.util.List;
 public interface EmployeesRepository extends JpaRepository<Employees, Long> {
 
 //	void saveEmployee(Employees employee);
-//	Employees getEmployeeById(long id);
-//	void deleteEmployeeById(long id);
+	Employees getEmployeeById(long id);
+	void deleteEmployeeById(long id);
 }

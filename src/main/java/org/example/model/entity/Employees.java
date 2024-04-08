@@ -20,7 +20,7 @@ public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
-    private Long employee_id;
+    private Long id;
 
     @Column(name = "first_name")
 	private String firstName;
@@ -34,12 +34,12 @@ public class Employees {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-//    @Column(name = "hire_date")
-//    @Temporal(TemporalType.DATE)
-//    private Date hire_date;
+    @Column(name = "hire_date")
+    @Temporal(TemporalType.DATE)
+    private Date hire_date;
 
-//    @Column(name = "job_id")
-//    private int job_id;
+    @Column(name = "job_id")
+    private String job_id;
 
     @Column(name = "salary")
     private Integer salary;

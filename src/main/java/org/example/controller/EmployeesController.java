@@ -10,6 +10,8 @@ import org.example.model.response.ResponseHandler;
 import org.example.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,21 +22,23 @@ import java.util.Optional;
 
 @Tag(name = "Employees")
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("api/employees")
 public class EmployeesController {
 
 
     @Autowired
-    private EmployeesService employeeService;
+    EmployeesService employeeService;
+        @GetMapping("/")
+    public String getEmployees(Model model) {
+        List<Employees> employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
 
-     @Operation(summary = "Get List of all Employees in the Database",
-            description = "This endpoint returns a list of all employees in the database.")
-    @GetMapping("/list-all")
-    public ResponseEntity<BaseResponse<List<Employees>>> getEmployeesList() {
-        return ResponseHandler.generateDefaultOkResponse(employeeService.getAllEmployees());
+//        int totalEmployeeCount = employeeService.getTotalEmployeeCount();
+//        model.addAttribute("totalEmployeeCount", totalEmployeeCount);
 
+        return "employeeList.html";
     }
 
 }
