@@ -31,5 +31,10 @@ public class EmployeesService {
 		employeesRepository.save(employee);
 	}
 
+	public int getEmployeeCount() {
+		return employeesRepository.getEmployeeCount();
+
+	}
+
 
 }

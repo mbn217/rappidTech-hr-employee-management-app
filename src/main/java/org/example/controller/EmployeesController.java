@@ -35,8 +35,8 @@ public class EmployeesController {
         List<Employees> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
 
-//        int totalEmployeeCount = employeeService.getTotalEmployeeCount();
-//        model.addAttribute("totalEmployeeCount", totalEmployeeCount);
+        int totalEmployeeCount = employeeService.getEmployeeCount();
+        model.addAttribute("totalEmployeeCount", totalEmployeeCount);
 
         return "employeeList.html";
     }
