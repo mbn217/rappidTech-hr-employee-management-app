@@ -5,20 +5,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.model.entity.Employees;
-import org.example.model.response.BaseResponse;
-import org.example.model.response.ResponseHandler;
 import org.example.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "Employees")
 @Slf4j
@@ -30,7 +24,9 @@ public class EmployeesController {
 
     @Autowired
     EmployeesService employeeService;
-        @GetMapping("/")
+    @Operation(summary = "Get List of all Employees in the Database",
+            description = "This endpoint returns a list of all employees in the database.")
+    @GetMapping("/")
     public String getEmployees(Model model) {
         List<Employees> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
@@ -38,7 +34,23 @@ public class EmployeesController {
         int totalEmployeeCount = employeeService.getEmployeeCount();
         model.addAttribute("totalEmployeeCount", totalEmployeeCount);
 
-        return "employeeList.html";
+        return "employeeList";
+    }
+
+    @Operation(summary = "Get Employee by ID",
+            description = "This endpoint returns an employee by their ID.")
+    @GetMapping("/count")
+    public String home(Model model) {
+        int totalEmployeeCount = employeeService.getEmployeeCount();
+        model.addAttribute("totalEmployeeCount", totalEmployeeCount);
+        return "employeeList";
+    }
+
+    @Operation(summary = "Get Application About Us Page",
+            description = "This endpoint returns the about us page.")
+    @GetMapping("/aboutUs")
+    public String aboutUsPage() {
+        return "aboutUs";
     }
 
 }
