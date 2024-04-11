@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Create Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -13,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
     <div class="container-fluid pl-5">
-        <a class="navbar-brand" href="#">Employee Management</a>
+        <a class="navbar-brand" href="#">Create Employee</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,10 +25,10 @@
                     <a class="nav-link active" aria-current="page" href="#" th:href="@{/employees}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#" a th:href="@{/employee/new}">Create Employee</a>
+                    <a class="nav-link" aria-current="page" href="#">Create Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="aboutUs" th:href="@{/aboutUs}">About Us</a>
+                    <a class="nav-link" aria-current="page" href="#" th:href="@{/employees/aboutUs}">About Us</a>
                 </li>
 
             </ul>
@@ -35,32 +36,41 @@
                 <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>&nbsp;
-            <button class="btn btn-success"><a class="text-dark" th:href="@{/login}">Login</a></button>
+            <button class="btn btn-success"><a th:href="@{/login}">Login</a></button>
         </div>
     </div>
 </nav>
 <br><br>
 
-<section class="container my-7">
-    <div class="row">
-        <div class="col-lg-6">
-
-            <h2>About Us</h2>
-            <p>
-                At RAPPID TECH, we believe in providing our students with the best possible education </p>
-            <p>
-                That's why we hire only the most experienced instructors in the industry. </p>
-            <p>
-                Our team of experts has years of experience in software testing and development, and they are passionate
-                about sharing their knowledge with the next generation of tech professionals. </p>
+<form class="container" style="display: grid;place-items: center;" th:action="@{/employees}" th:object="${employee}"
+      th:method="post">
+    <div class="mb-3 w-50">
+        <div class="mb-3">
+            <label for="exampleInputText1" class="form-label">First Name: </label>
+            <input type="text" class="form-control" th:field="*{firstName}"/>
         </div>
-        <div class="col-lg-6">
-            <img src="src/main/resources/templates/RappidTech.png" alt="RappidTech" class="img-fluid ml-5"
-                 style="width:500px;height:500px;">
+        <div class="mb-3">
+            <label for="exampleInputText1" class="form-label">Last Name: </label>
+            <input type="text" class="form-control" th:field="*{lastName}"/>
         </div>
     </div>
-</section>
-
-
+    <div class="mb-3  w-50">
+        <label for="exampleInputText1" class="form-label">Email: </label>
+        <input type="text" class="form-control" th:field="*{email}"/>
+    </div>
+        <div class="mb-3  w-50">
+        <label for="exampleInputText1" class="form-label">Phone Number#: </label>
+        <input type="text" class="form-control" th:field="*{phoneNumber}"/>
+    </div>
+    <div class="mb-3  w-50">
+        <label for="exampleInputText1" class="form-label">Job Title: </label>
+        <input type="text" class="form-control" th:field="*{job_id}"/>
+    </div>
+    <div class="mb-3 w-50">
+        <label for="exampleInputText1" class="form-label">Salary: </label>
+        <input type="text" class="form-control" th:field="*{salary}"/>
+    </div>
+    <button type="submit" class="btn btn-primary" style="width: 15%;">Create</button>
+</form>
 </body>
 </html>
