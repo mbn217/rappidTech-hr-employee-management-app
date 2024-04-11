@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -18,15 +20,24 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("api/employees")
 public class EmployeesController {
 
 
     @Autowired
     EmployeesService employeeService;
+
+    @Operation(summary = "Get Home Page",
+            description = "This endpoint returns the home page.")
+    @GetMapping("/")
+    public String home(Model model) {
+        int totalEmployeeCount = employeeService.getEmployeeCount();
+        model.addAttribute("totalEmployeeCount", totalEmployeeCount);
+        return "employeeList";
+    }
+
     @Operation(summary = "Get List of all Employees in the Database",
             description = "This endpoint returns a list of all employees in the database.")
-    @GetMapping("/")
+    @GetMapping("/employees")
     public String getEmployees(Model model) {
         List<Employees> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
@@ -37,15 +48,6 @@ public class EmployeesController {
         return "employeeList";
     }
 
-    @Operation(summary = "Get Employee by ID",
-            description = "This endpoint returns an employee by their ID.")
-    @GetMapping("/count")
-    public String home(Model model) {
-        int totalEmployeeCount = employeeService.getEmployeeCount();
-        model.addAttribute("totalEmployeeCount", totalEmployeeCount);
-        return "employeeList";
-    }
-
     @Operation(summary = "Get Application About Us Page",
             description = "This endpoint returns the about us page.")
     @GetMapping("/aboutUs")
@@ -53,4 +55,18 @@ public class EmployeesController {
         return "aboutUs";
     }
 
+    //create employee
+    @Operation(summary = "Create Employee",
+            description = "This endpoint creates an employee.")
+    @GetMapping("/employee/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("employee", new Employees());
+        return "createEmployee";
+    }
+
+    @PostMapping("/employees")
+    public String createEmployee(@ModelAttribute Employees employee) {
+        //employeeService.createEmployee(employee);
+        return "redirect:/employees";
+    }
 }

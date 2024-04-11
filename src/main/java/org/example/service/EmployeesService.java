@@ -36,5 +36,9 @@ public class EmployeesService {
 
 	}
 
+	public void updateEmployee(long id, Employees employee) {
+		employeesRepository.save(employee);
+	}
+
 
 }
