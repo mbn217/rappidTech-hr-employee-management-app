@@ -59,7 +59,7 @@
         <td th:text="${employee.email}">dfdfd</td>
         <td th:text="${employee.phoneNumber}">dfdfd</td>
         <td th:text="${employee.hire_date}">dfdfd</td>
-        <td th:text="${employee.job_id}">dfdfd</td>
+        <td th:text="${employee.job.jobId}">dfdfd</td>
         <td th:text="${employee.salary}">dfdfd</td>
         <td>
             <button class="btn btn-warning"><a class="text-dark" th:href="@{/employees/{id}/edit(id=${employee.id})}">Edit</a></button>
