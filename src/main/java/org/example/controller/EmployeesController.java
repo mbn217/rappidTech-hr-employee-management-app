@@ -9,9 +9,7 @@ import org.example.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,4 +67,19 @@ public class EmployeesController {
         employeeService.createEmployee(employee);
         return "redirect:/employees";
     }
+    @Operation(summary = "Delete Employee",
+            description = "This endpoint deletes an employee.")
+    @GetMapping("/employees/{id}/delete")
+    public String deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/employees";
+    }
+
+//    @Operation(summary = "Show Edit Employee Form",
+//            description = "This endpoint returns the edit employee form.")
+//    @PostMapping("/employees/{id}/edit")
+//    public String updateEmployee(@PathVariable Long id, @ModelAttribute Employees employee) {
+//        employeeService.updateEmployee(id, employee);
+//        return "redirect:/employees";
+//    }
 }

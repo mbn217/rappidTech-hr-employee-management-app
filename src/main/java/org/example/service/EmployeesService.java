@@ -40,4 +40,8 @@ public class EmployeesService {
     public void createEmployee(Employees employee) {
 		employeesRepository.save(employee);
     }
+
+	public void deleteEmployee(Long id) {
+		employeesRepository.deleteById(id);
+	}
 }
