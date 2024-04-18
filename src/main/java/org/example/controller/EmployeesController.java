@@ -55,17 +55,18 @@ public class EmployeesController {
     }
 
     //create employee
-    @Operation(summary = "Create Employee",
-            description = "This endpoint creates an employee.")
+    @Operation(summary = "Show Create Employee Form",
+            description = "This endpoint returns the create employee form.")
     @GetMapping("/employee/new")
     public String showCreateForm(Model model) {
         model.addAttribute("employee", new Employees());
         return "createEmployee";
     }
-
+    @Operation(summary = "Create Employee",
+        description = "This endpoint creates an employee.")
     @PostMapping("/employees")
     public String createEmployee(@ModelAttribute Employees employee) {
-        //employeeService.createEmployee(employee);
+        employeeService.createEmployee(employee);
         return "redirect:/employees";
     }
 }

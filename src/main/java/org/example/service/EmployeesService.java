@@ -27,10 +27,6 @@ public class EmployeesService {
 		employeesRepository.deleteEmployeeById(id);
 	}
 
-	public void saveEmployee(Employees employee) {
-		employeesRepository.save(employee);
-	}
-
 	public int getEmployeeCount() {
 		return employeesRepository.getEmployeeCount();
 
@@ -41,4 +37,7 @@ public class EmployeesService {
 	}
 
 
+    public void createEmployee(Employees employee) {
+		employeesRepository.save(employee);
+    }
 }
