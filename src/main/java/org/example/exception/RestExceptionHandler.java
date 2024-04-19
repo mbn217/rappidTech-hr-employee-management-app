@@ -1,9 +1,9 @@
 package org.example.exception;
 
-import com.example.g3dlgovservice.model.response.BaseResponse;
-import com.example.g3dlgovservice.model.response.ResponseHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.example.model.response.BaseResponse;
+import org.example.model.response.ResponseHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
