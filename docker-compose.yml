@@ -10,15 +10,15 @@ services:
       - db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hr
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
 
   db:
     image: mbn217/hr-employee-db:final
     ports:
       - 3307:3306
     environment:
-      - MYSQL_DATABASE=your_database_name
+      - MYSQL_DATABASE=hr
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
