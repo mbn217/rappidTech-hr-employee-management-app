@@ -1,12 +1,15 @@
-# Description: Dockerfile for Spring Boot Application
-FROM openjdk:8-jdk-alpine
 # Add Maintainer Info
 LABEL authors="MohamedNheri"
-# Path to jar file
-ARG JAR_FILE=target/*.jar
-# Add the application's jar to the container
-COPY ${JAR_FILE} app.jar
-# Run the jar file
-ENTRYPOINT ["java","-jar","/app.jar"]
-
+# Use Maven to build the application
+FROM maven:3.8.4-openjdk-11 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+# Use a lightweight JDK image to run the application
+FROM openjdk:11-jre-slim
+WORKDIR /app
+COPY --from=build /app/target/employee-management.jar employee-management.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "employee-management.jar"]
 
