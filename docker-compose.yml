@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   app:
     build:
@@ -6,20 +7,31 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - db
+      - hr-db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hr?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://hr-db:3306/hr?allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     container_name: hr-employee-app
+    networks:
+      - hr-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
 
-  db:
+  hr-db:
     image: mbn217/hr-employee-db:final
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_DATABASE=hr
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - hr-network
+    container_name: hr-db
+
+networks:
+  hr-network:
+    driver: bridge
